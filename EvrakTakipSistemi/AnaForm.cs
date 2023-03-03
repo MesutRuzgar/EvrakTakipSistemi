@@ -102,5 +102,23 @@ namespace EvrakTakipSistemi
             Listele();
 
         }
+
+        private void btnGuncelle_Click(object sender, EventArgs e)
+        {
+            OleDbCommand komut = new OleDbCommand("update Tbl_Evraklar set VKN=@p1,FirmaAd=@p2,VergiLevhasiYili=@p3,FaaliyetBelgesiTarihi=@p4,ImzaSirküsüTarihi=@p5,FirmaYetkilileri=@p6 where Id=@p7", bgl.baglanti());
+            komut.Parameters.AddWithValue("@p1", mskVkn.Text);
+            komut.Parameters.AddWithValue("@p2", tbxAd.Text);
+            komut.Parameters.AddWithValue("@p3", tbxVergiYili.Text);
+            komut.Parameters.AddWithValue("@p4", tbxFaaliyetBelgesiTarih.Text);
+            komut.Parameters.AddWithValue("@p5", tbxİmzaSirkusuTarih.Text);
+            komut.Parameters.AddWithValue("@p6", rtbxFirmaYetkili.Text);
+            komut.Parameters.AddWithValue("@p7", tbxId.Text);
+            komut.ExecuteNonQuery();
+            bgl.baglanti().Close();
+            MessageBox.Show("Güncelleme işlemi başarılı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Temizle();
+            Listele();
+
+        }
     }
 }

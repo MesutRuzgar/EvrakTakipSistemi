@@ -238,6 +238,7 @@ namespace EvrakTakipSistemi
             this.btnGuncelle.TabIndex = 10;
             this.btnGuncelle.Text = "GÜNCELLE";
             this.btnGuncelle.UseVisualStyleBackColor = true;
+            this.btnGuncelle.Click += new System.EventHandler(this.btnGuncelle_Click);
             // 
             // btnSil
             // 
