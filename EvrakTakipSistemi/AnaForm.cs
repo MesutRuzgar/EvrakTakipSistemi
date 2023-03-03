@@ -57,6 +57,7 @@ namespace EvrakTakipSistemi
 
         private void Temizle()
         {
+            tbxId.Text = "";
             mskVkn.Text = "";
             tbxAd.Text = "";
             tbxVergiYili.Text = "";
@@ -64,7 +65,7 @@ namespace EvrakTakipSistemi
             tbxİmzaSirkusuTarih.Text = "";
             rtbxFirmaYetkili.Text = "";
         }
-       
+
 
         private void Listele()
         {
@@ -90,7 +91,16 @@ namespace EvrakTakipSistemi
             Filtre();
         }
 
+        private void btnSil_Click(object sender, EventArgs e)
+        {
+            OleDbCommand komut = new OleDbCommand("Delete from Tbl_Evraklar where Id=@p1", bgl.baglanti());
+            komut.Parameters.AddWithValue("@p1", tbxId.Text);
+            komut.ExecuteNonQuery();
+            bgl.baglanti().Close();
+            MessageBox.Show("Silme işlemi başarılı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Temizle();
+            Listele();
 
-    
+        }
     }
 }

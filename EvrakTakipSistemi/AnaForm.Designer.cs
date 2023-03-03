@@ -46,13 +46,13 @@ namespace EvrakTakipSistemi
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tbxId = new System.Windows.Forms.TextBox();
             this.btnGuncelle = new System.Windows.Forms.Button();
             this.btnSil = new System.Windows.Forms.Button();
             this.btnEkle = new System.Windows.Forms.Button();
             this.rtbxFirmaYetkili = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tbxId = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -213,6 +213,23 @@ namespace EvrakTakipSistemi
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MÜŞTERİ BİLGİLERİ";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(57, 39);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(110, 18);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "MÜŞTERİ NO :";
+            // 
+            // tbxId
+            // 
+            this.tbxId.Enabled = false;
+            this.tbxId.Location = new System.Drawing.Point(173, 36);
+            this.tbxId.Name = "tbxId";
+            this.tbxId.Size = new System.Drawing.Size(153, 24);
+            this.tbxId.TabIndex = 14;
+            // 
             // btnGuncelle
             // 
             this.btnGuncelle.Location = new System.Drawing.Point(297, 175);
@@ -230,7 +247,7 @@ namespace EvrakTakipSistemi
             this.btnSil.TabIndex = 9;
             this.btnSil.Text = "SİL";
             this.btnSil.UseVisualStyleBackColor = true;
-            
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // btnEkle
             // 
@@ -259,23 +276,6 @@ namespace EvrakTakipSistemi
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(57, 39);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(110, 18);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "MÜŞTERİ NO :";
-            // 
-            // tbxId
-            // 
-            this.tbxId.Enabled = false;
-            this.tbxId.Location = new System.Drawing.Point(173, 36);
-            this.tbxId.Name = "tbxId";
-            this.tbxId.Size = new System.Drawing.Size(153, 24);
-            this.tbxId.TabIndex = 14;
             // 
             // AnaForm
             // 
