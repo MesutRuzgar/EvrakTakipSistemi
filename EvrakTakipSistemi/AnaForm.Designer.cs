@@ -82,16 +82,18 @@ namespace EvrakTakipSistemi
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(27, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 18);
+            this.label1.Size = new System.Drawing.Size(186, 18);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Ara :";
+            this.label1.Text = "Firma İsmine Göre Arama :";
             // 
             // tbxSearch
             // 
-            this.tbxSearch.Location = new System.Drawing.Point(71, 14);
+            this.tbxSearch.Location = new System.Drawing.Point(219, 14);
             this.tbxSearch.Name = "tbxSearch";
-            this.tbxSearch.Size = new System.Drawing.Size(714, 24);
+            this.tbxSearch.Size = new System.Drawing.Size(566, 24);
             this.tbxSearch.TabIndex = 1;
+            this.tbxSearch.TextChanged += new System.EventHandler(this.tbxSearch_TextChanged);
+            
             // 
             // label2
             // 

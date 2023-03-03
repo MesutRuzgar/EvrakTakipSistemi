@@ -63,13 +63,30 @@ namespace EvrakTakipSistemi
             tbxİmzaSirkusuTarih.Text = "";
             rtbxFirmaYetkili.Text = "";
         }
+       
 
         private void Listele()
         {
-            OleDbDataAdapter da = new OleDbDataAdapter("select * from tbl_evraklar", bgl.baglanti());
+            OleDbCommand komut = new OleDbCommand("select VKN,FirmaAd AS [Firma Adı],VergiLevhasiYili AS [Vergi Levhası Yılı],FaaliyetBelgesiTarihi AS [Faaliyet Belgesi Tarihi],ImzaSirküsüTarihi AS [İmza Sirküsü Tarihi],FirmaYetkilileri AS [Firma Yetkilileri] from tbl_evraklar", bgl.baglanti());
+            OleDbDataAdapter da = new OleDbDataAdapter(komut);
             DataTable dt = new DataTable();
             da.Fill(dt);
             dataGridView1.DataSource = dt;
+        }
+
+        private void Filtre()
+        {
+            OleDbCommand komut = new OleDbCommand("select VKN,FirmaAd AS [Firma Adı],VergiLevhasiYili AS [Vergi Levhası Yılı],FaaliyetBelgesiTarihi AS [Faaliyet Belgesi Tarihi],ImzaSirküsüTarihi AS [İmza Sirküsü Tarihi],FirmaYetkilileri AS [Firma Yetkilileri] from tbl_evraklar where FirmaAd like '%" + tbxSearch.Text + "%'", bgl.baglanti());
+            OleDbDataAdapter da = new OleDbDataAdapter(komut);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+        }
+
+        private void tbxSearch_TextChanged(object sender, EventArgs e)
+        {
+            //text change kullanmamın sebebi her bir harfe bastığımda filtreleme yaptırmak istemem
+            Filtre();
         }
     }
 }
