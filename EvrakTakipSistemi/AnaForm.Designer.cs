@@ -1,7 +1,7 @@
 ﻿
 namespace EvrakTakipSistemi
 {
-    partial class Form1
+    partial class AnaForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace EvrakTakipSistemi
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnaForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,10 +46,10 @@ namespace EvrakTakipSistemi
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.rtbxFirmaYetkili = new System.Windows.Forms.RichTextBox();
-            this.btnEkle = new System.Windows.Forms.Button();
-            this.btnSil = new System.Windows.Forms.Button();
             this.btnGuncelle = new System.Windows.Forms.Button();
+            this.btnSil = new System.Windows.Forms.Button();
+            this.btnEkle = new System.Windows.Forms.Button();
+            this.rtbxFirmaYetkili = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -68,17 +68,19 @@ namespace EvrakTakipSistemi
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 20);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1088, 267);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 29);
+            this.label1.Location = new System.Drawing.Point(27, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 18);
             this.label1.TabIndex = 1;
@@ -86,7 +88,7 @@ namespace EvrakTakipSistemi
             // 
             // tbxSearch
             // 
-            this.tbxSearch.Location = new System.Drawing.Point(71, 26);
+            this.tbxSearch.Location = new System.Drawing.Point(71, 14);
             this.tbxSearch.Name = "tbxSearch";
             this.tbxSearch.Size = new System.Drawing.Size(714, 24);
             this.tbxSearch.TabIndex = 1;
@@ -199,29 +201,21 @@ namespace EvrakTakipSistemi
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.tbxVergiYili);
-            this.groupBox2.Location = new System.Drawing.Point(15, 70);
+            this.groupBox2.Location = new System.Drawing.Point(15, 47);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(782, 214);
+            this.groupBox2.Size = new System.Drawing.Size(782, 237);
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MÜŞTERİ BİLGİLERİ";
             // 
-            // rtbxFirmaYetkili
+            // btnGuncelle
             // 
-            this.rtbxFirmaYetkili.Location = new System.Drawing.Point(617, 99);
-            this.rtbxFirmaYetkili.Name = "rtbxFirmaYetkili";
-            this.rtbxFirmaYetkili.Size = new System.Drawing.Size(153, 109);
-            this.rtbxFirmaYetkili.TabIndex = 7;
-            this.rtbxFirmaYetkili.Text = "";
-            // 
-            // btnEkle
-            // 
-            this.btnEkle.Location = new System.Drawing.Point(93, 159);
-            this.btnEkle.Name = "btnEkle";
-            this.btnEkle.Size = new System.Drawing.Size(99, 33);
-            this.btnEkle.TabIndex = 8;
-            this.btnEkle.Text = "EKLE";
-            this.btnEkle.UseVisualStyleBackColor = true;
+            this.btnGuncelle.Location = new System.Drawing.Point(303, 159);
+            this.btnGuncelle.Name = "btnGuncelle";
+            this.btnGuncelle.Size = new System.Drawing.Size(99, 33);
+            this.btnGuncelle.TabIndex = 10;
+            this.btnGuncelle.Text = "GÜNCELLE";
+            this.btnGuncelle.UseVisualStyleBackColor = true;
             // 
             // btnSil
             // 
@@ -232,14 +226,23 @@ namespace EvrakTakipSistemi
             this.btnSil.Text = "SİL";
             this.btnSil.UseVisualStyleBackColor = true;
             // 
-            // btnGuncelle
+            // btnEkle
             // 
-            this.btnGuncelle.Location = new System.Drawing.Point(303, 159);
-            this.btnGuncelle.Name = "btnGuncelle";
-            this.btnGuncelle.Size = new System.Drawing.Size(99, 33);
-            this.btnGuncelle.TabIndex = 10;
-            this.btnGuncelle.Text = "GÜNCELLE";
-            this.btnGuncelle.UseVisualStyleBackColor = true;
+            this.btnEkle.Location = new System.Drawing.Point(93, 159);
+            this.btnEkle.Name = "btnEkle";
+            this.btnEkle.Size = new System.Drawing.Size(99, 33);
+            this.btnEkle.TabIndex = 8;
+            this.btnEkle.Text = "EKLE";
+            this.btnEkle.UseVisualStyleBackColor = true;
+            this.btnEkle.Click += new System.EventHandler(this.btnEkle_Click);
+            // 
+            // rtbxFirmaYetkili
+            // 
+            this.rtbxFirmaYetkili.Location = new System.Drawing.Point(617, 99);
+            this.rtbxFirmaYetkili.Name = "rtbxFirmaYetkili";
+            this.rtbxFirmaYetkili.Size = new System.Drawing.Size(153, 109);
+            this.rtbxFirmaYetkili.TabIndex = 7;
+            this.rtbxFirmaYetkili.Text = "";
             // 
             // pictureBox1
             // 
@@ -251,10 +254,11 @@ namespace EvrakTakipSistemi
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             // 
-            // Form1
+            // AnaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.CadetBlue;
             this.ClientSize = new System.Drawing.Size(1118, 592);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox2);
@@ -263,8 +267,9 @@ namespace EvrakTakipSistemi
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Form1";
+            this.Name = "AnaForm";
             this.Text = "Angün Döviz Ve Altın Ticaret A.Ş.  --- Desing By Mesut RÜZGAR";
+            this.Load += new System.EventHandler(this.AnaForm_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox2.ResumeLayout(false);
