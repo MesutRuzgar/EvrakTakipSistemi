@@ -29,6 +29,7 @@ namespace EvrakTakipSistemi
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            tbxId.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
             mskVkn.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
             tbxAd.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
             tbxVergiYili.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
@@ -67,7 +68,7 @@ namespace EvrakTakipSistemi
 
         private void Listele()
         {
-            OleDbCommand komut = new OleDbCommand("select VKN,FirmaAd AS [Firma Adı],VergiLevhasiYili AS [Vergi Levhası Yılı],FaaliyetBelgesiTarihi AS [Faaliyet Belgesi Tarihi],ImzaSirküsüTarihi AS [İmza Sirküsü Tarihi],FirmaYetkilileri AS [Firma Yetkilileri] from tbl_evraklar", bgl.baglanti());
+            OleDbCommand komut = new OleDbCommand("select Id AS [Müşteri No],VKN,FirmaAd AS [Firma Adı],VergiLevhasiYili AS [Vergi Levhası Yılı],FaaliyetBelgesiTarihi AS [Faaliyet Belgesi Tarihi],ImzaSirküsüTarihi AS [İmza Sirküsü Tarihi],FirmaYetkilileri AS [Firma Yetkilileri] from tbl_evraklar", bgl.baglanti());
             OleDbDataAdapter da = new OleDbDataAdapter(komut);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -76,7 +77,7 @@ namespace EvrakTakipSistemi
 
         private void Filtre()
         {
-            OleDbCommand komut = new OleDbCommand("select VKN,FirmaAd AS [Firma Adı],VergiLevhasiYili AS [Vergi Levhası Yılı],FaaliyetBelgesiTarihi AS [Faaliyet Belgesi Tarihi],ImzaSirküsüTarihi AS [İmza Sirküsü Tarihi],FirmaYetkilileri AS [Firma Yetkilileri] from tbl_evraklar where FirmaAd like '%" + tbxSearch.Text + "%'", bgl.baglanti());
+            OleDbCommand komut = new OleDbCommand("select Id AS [Müşteri No],VKN,FirmaAd AS [Firma Adı],VergiLevhasiYili AS [Vergi Levhası Yılı],FaaliyetBelgesiTarihi AS [Faaliyet Belgesi Tarihi],ImzaSirküsüTarihi AS [İmza Sirküsü Tarihi],FirmaYetkilileri AS [Firma Yetkilileri] from tbl_evraklar where FirmaAd like '%" + tbxSearch.Text + "%'", bgl.baglanti());
             OleDbDataAdapter da = new OleDbDataAdapter(komut);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -88,5 +89,8 @@ namespace EvrakTakipSistemi
             //text change kullanmamın sebebi her bir harfe bastığımda filtreleme yaptırmak istemem
             Filtre();
         }
+
+
+    
     }
 }
