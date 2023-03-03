@@ -39,9 +39,29 @@ namespace EvrakTakipSistemi
 
         private void btnEkle_Click(object sender, EventArgs e)
         {
-
+            OleDbCommand komut = new OleDbCommand("insert into Tbl_Evraklar (VKN,FirmaAd,VergiLevhasiYili,FaaliyetBelgesiTarihi,ImzaSirküsüTarihi,FirmaYetkilileri) values (@p1,@p2,@p3,@p4,@p5,@p6)", bgl.baglanti());
+            komut.Parameters.AddWithValue("@p1", mskVkn.Text);
+            komut.Parameters.AddWithValue("@p2", tbxAd.Text);
+            komut.Parameters.AddWithValue("@p3", tbxVergiYili.Text);
+            komut.Parameters.AddWithValue("@p4", tbxFaaliyetBelgesiTarih.Text);
+            komut.Parameters.AddWithValue("@p5", tbxİmzaSirkusuTarih.Text);
+            komut.Parameters.AddWithValue("@p6", rtbxFirmaYetkili.Text);
+            komut.ExecuteNonQuery();
+            MessageBox.Show("Ekleme işlemi başarılı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Temizle();
+            bgl.baglanti().Close();
             Listele();
 
+        }
+
+        private void Temizle()
+        {
+            mskVkn.Text = "";
+            tbxAd.Text = "";
+            tbxVergiYili.Text = "";
+            tbxFaaliyetBelgesiTarih.Text = "";
+            tbxİmzaSirkusuTarih.Text = "";
+            rtbxFirmaYetkili.Text = "";
         }
 
         private void Listele()
