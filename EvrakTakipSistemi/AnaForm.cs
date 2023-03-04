@@ -24,7 +24,7 @@ namespace EvrakTakipSistemi
         private void AnaForm_Load(object sender, EventArgs e)
         {
             Listele();
-            
+
         }
 
 
@@ -98,11 +98,9 @@ namespace EvrakTakipSistemi
                 DataGridViewCellStyle renk = new DataGridViewCellStyle();
                 DateTime bugun = DateTime.Now;
 
-               
-
-                //imza sirküleri tarihi için
-                if (dataGridView1.Rows[i].Cells[5].Value.ToString() != "")
+                if (dataGridView1.Rows[i].Cells[i].Value.ToString() != "")
                 {
+                    //imza sirküleri tarihi için
                     dbImzaYili = dataGridView1.Rows[i].Cells[5].Value.ToString();
                     DateTime dtDbImzaYili = DateTime.Parse(dbImzaYili);
                     if (dtDbImzaYili >= bugun)
@@ -113,22 +111,13 @@ namespace EvrakTakipSistemi
                     {
                         renk.BackColor = Color.Firebrick;
                     }
+                    dataGridView1.Rows[i].Cells[5].Style.BackColor = renk.BackColor;
 
-                }
-                else
-                {
-                    renk.BackColor = Color.White;
-                }
-
-                dataGridView1.Rows[i].Cells[5].Style.BackColor = renk.BackColor;
-
-                //faaliyet belgesi tarihi için
-                if (dataGridView1.Rows[i].Cells[4].Value.ToString() !="")
-                {
-                    dbFaaliyetYili = dataGridView1.Rows[i].Cells[4].Value.ToString();                    
+                    //faaliyet belgesi tarihi için
+                    dbFaaliyetYili = dataGridView1.Rows[i].Cells[4].Value.ToString();
                     DateTime dtDbFaaliyet = DateTime.Parse(dbFaaliyetYili);
                     DateTime gecerliTarih = dtDbFaaliyet.AddDays(60);
-                    if (gecerliTarih >=bugun)
+                    if (gecerliTarih >= bugun)
                     {
                         renk.BackColor = Color.YellowGreen;
                     }
@@ -136,25 +125,14 @@ namespace EvrakTakipSistemi
                     {
                         renk.BackColor = Color.Firebrick;
                     }
+                    dataGridView1.Rows[i].Cells[4].Style.BackColor = renk.BackColor;
 
-                }
-                else
-                {
-                    renk.BackColor = Color.White;
-                }
-                dataGridView1.Rows[i].Cells[4].Style.BackColor = renk.BackColor;
-
-                {
                     //vergi levhası yılı için
                     int buYil = bugun.Year;
                     int vergiYili = buYil - 1;
-
-                 
-
                     if (dataGridView1.Rows[i].Cells[3].Value.ToString() == Convert.ToString(vergiYili))
                     {
                         renk.BackColor = Color.YellowGreen;
-                       
                     }
                     else
                     {
@@ -162,8 +140,13 @@ namespace EvrakTakipSistemi
                     }
                     dataGridView1.Rows[i].Cells[3].Style.BackColor = renk.BackColor;
 
-                  
                 }
+
+                else
+                {
+                    renk.BackColor = Color.White;
+                }
+                               
             }
         }
 
