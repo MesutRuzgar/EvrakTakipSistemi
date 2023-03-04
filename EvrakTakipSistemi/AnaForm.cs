@@ -29,13 +29,22 @@ namespace EvrakTakipSistemi
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            tbxId.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-            mskVkn.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-            tbxAd.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-            tbxVergiYili.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-            tbxFaaliyetBelgesiTarih.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-            tbxİmzaSirkusuTarih.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-            rtbxFirmaYetkili.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
+            try
+            {
+                tbxId.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                mskVkn.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                tbxAd.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                tbxVergiYili.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+                tbxFaaliyetBelgesiTarih.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                tbxİmzaSirkusuTarih.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+                rtbxFirmaYetkili.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Geçersiz işlem!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void btnEkle_Click(object sender, EventArgs e)
@@ -74,6 +83,8 @@ namespace EvrakTakipSistemi
             DataTable dt = new DataTable();
             da.Fill(dt);
             dataGridView1.DataSource = dt;
+            
+
         }
 
         private void Filtre()
@@ -119,6 +130,11 @@ namespace EvrakTakipSistemi
             Temizle();
             Listele();
 
+        }
+
+        private void btnTemizle_Click(object sender, EventArgs e)
+        {
+            Temizle();
         }
     }
 }

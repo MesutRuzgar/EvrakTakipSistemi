@@ -46,6 +46,7 @@ namespace EvrakTakipSistemi
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.tbxId = new System.Windows.Forms.TextBox();
             this.btnGuncelle = new System.Windows.Forms.Button();
@@ -53,6 +54,7 @@ namespace EvrakTakipSistemi
             this.btnEkle = new System.Windows.Forms.Button();
             this.rtbxFirmaYetkili = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnTemizle = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -189,6 +191,8 @@ namespace EvrakTakipSistemi
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnTemizle);
+            this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.tbxId);
             this.groupBox2.Controls.Add(this.btnGuncelle);
@@ -213,6 +217,15 @@ namespace EvrakTakipSistemi
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MÜŞTERİ BİLGİLERİ";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(159, 215);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(46, 18);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "label9";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -232,7 +245,7 @@ namespace EvrakTakipSistemi
             // 
             // btnGuncelle
             // 
-            this.btnGuncelle.Location = new System.Drawing.Point(297, 175);
+            this.btnGuncelle.Location = new System.Drawing.Point(296, 175);
             this.btnGuncelle.Name = "btnGuncelle";
             this.btnGuncelle.Size = new System.Drawing.Size(99, 33);
             this.btnGuncelle.TabIndex = 10;
@@ -242,7 +255,7 @@ namespace EvrakTakipSistemi
             // 
             // btnSil
             // 
-            this.btnSil.Location = new System.Drawing.Point(192, 175);
+            this.btnSil.Location = new System.Drawing.Point(191, 175);
             this.btnSil.Name = "btnSil";
             this.btnSil.Size = new System.Drawing.Size(99, 33);
             this.btnSil.TabIndex = 9;
@@ -252,7 +265,7 @@ namespace EvrakTakipSistemi
             // 
             // btnEkle
             // 
-            this.btnEkle.Location = new System.Drawing.Point(87, 175);
+            this.btnEkle.Location = new System.Drawing.Point(86, 175);
             this.btnEkle.Name = "btnEkle";
             this.btnEkle.Size = new System.Drawing.Size(99, 33);
             this.btnEkle.TabIndex = 8;
@@ -277,6 +290,16 @@ namespace EvrakTakipSistemi
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
+            // 
+            // btnTemizle
+            // 
+            this.btnTemizle.Location = new System.Drawing.Point(401, 175);
+            this.btnTemizle.Name = "btnTemizle";
+            this.btnTemizle.Size = new System.Drawing.Size(99, 33);
+            this.btnTemizle.TabIndex = 17;
+            this.btnTemizle.Text = "TEMİZLE";
+            this.btnTemizle.UseVisualStyleBackColor = true;
+            this.btnTemizle.Click += new System.EventHandler(this.btnTemizle_Click);
             // 
             // AnaForm
             // 
@@ -329,6 +352,8 @@ namespace EvrakTakipSistemi
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tbxId;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnTemizle;
     }
 }
 
