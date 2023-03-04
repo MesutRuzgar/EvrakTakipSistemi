@@ -24,6 +24,7 @@ namespace EvrakTakipSistemi
         private void AnaForm_Load(object sender, EventArgs e)
         {
             Listele();
+            
         }
 
 
@@ -39,12 +40,12 @@ namespace EvrakTakipSistemi
                 tbxİmzaSirkusuTarih.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
                 rtbxFirmaYetkili.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
             }
-            catch (Exception)
+            catch
             {
 
                 MessageBox.Show("Geçersiz işlem!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
+
         }
 
         private void btnEkle_Click(object sender, EventArgs e)
@@ -83,9 +84,39 @@ namespace EvrakTakipSistemi
             DataTable dt = new DataTable();
             da.Fill(dt);
             dataGridView1.DataSource = dt;
-            
+            Gecerlimi();
 
         }
+
+        private void Gecerlimi()
+        {
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+            {
+                DateTime date = DateTime.Now;
+              
+                {
+                    //vergi levhası yılı için
+                    int buYil = date.Year;
+                    int vergiYili = buYil - 1;
+
+                    DataGridViewCellStyle renk = new DataGridViewCellStyle();
+
+                    if (dataGridView1.Rows[i].Cells[3].Value.ToString() == Convert.ToString(vergiYili))
+                    {
+                        renk.BackColor = Color.Green;
+                       
+                    }
+                    else
+                    {
+                        renk.BackColor = Color.Red;
+                    }
+                    dataGridView1.Rows[i].Cells[3].Style.BackColor = renk.BackColor;
+
+                  
+                }
+            }
+        }
+
 
         private void Filtre()
         {
@@ -94,6 +125,7 @@ namespace EvrakTakipSistemi
             DataTable dt = new DataTable();
             da.Fill(dt);
             dataGridView1.DataSource = dt;
+            Gecerlimi();
         }
 
         private void tbxSearch_TextChanged(object sender, EventArgs e)
