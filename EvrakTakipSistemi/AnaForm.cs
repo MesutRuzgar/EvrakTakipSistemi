@@ -90,16 +90,41 @@ namespace EvrakTakipSistemi
 
         private void Gecerlimi()
         {
+            string dbFaaliyetYili;
+
             for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
-                DateTime date = DateTime.Now;
-              
+                DataGridViewCellStyle renk = new DataGridViewCellStyle();
+                DateTime bugun = DateTime.Now;
+
+                //faaliyet belgesi tarihi için
+                if (dataGridView1.Rows[i].Cells[3].Value.ToString() !="")
+                {
+                    dbFaaliyetYili = dataGridView1.Rows[i].Cells[4].Value.ToString();                    
+                    DateTime dtDbFaaliyet = DateTime.Parse(dbFaaliyetYili);
+                    DateTime gecerliTarih = dtDbFaaliyet.AddDays(60);
+                    if (gecerliTarih >=bugun)
+                    {
+                        renk.BackColor = Color.Green;
+                    }
+                    else
+                    {
+                        renk.BackColor = Color.Red;
+                    }
+
+                }
+                else
+                {
+                    renk.BackColor = Color.White;
+                }
+                dataGridView1.Rows[i].Cells[4].Style.BackColor = renk.BackColor;
+
                 {
                     //vergi levhası yılı için
-                    int buYil = date.Year;
+                    int buYil = bugun.Year;
                     int vergiYili = buYil - 1;
 
-                    DataGridViewCellStyle renk = new DataGridViewCellStyle();
+                 
 
                     if (dataGridView1.Rows[i].Cells[3].Value.ToString() == Convert.ToString(vergiYili))
                     {
