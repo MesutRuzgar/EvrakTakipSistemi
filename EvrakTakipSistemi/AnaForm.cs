@@ -91,25 +91,50 @@ namespace EvrakTakipSistemi
         private void Gecerlimi()
         {
             string dbFaaliyetYili;
+            string dbImzaYili;
 
             for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
                 DataGridViewCellStyle renk = new DataGridViewCellStyle();
                 DateTime bugun = DateTime.Now;
 
+               
+
+                //imza sirküleri tarihi için
+                if (dataGridView1.Rows[i].Cells[5].Value.ToString() != "")
+                {
+                    dbImzaYili = dataGridView1.Rows[i].Cells[5].Value.ToString();
+                    DateTime dtDbImzaYili = DateTime.Parse(dbImzaYili);
+                    if (dtDbImzaYili >= bugun)
+                    {
+                        renk.BackColor = Color.YellowGreen;
+                    }
+                    else
+                    {
+                        renk.BackColor = Color.Firebrick;
+                    }
+
+                }
+                else
+                {
+                    renk.BackColor = Color.White;
+                }
+
+                dataGridView1.Rows[i].Cells[5].Style.BackColor = renk.BackColor;
+
                 //faaliyet belgesi tarihi için
-                if (dataGridView1.Rows[i].Cells[3].Value.ToString() !="")
+                if (dataGridView1.Rows[i].Cells[4].Value.ToString() !="")
                 {
                     dbFaaliyetYili = dataGridView1.Rows[i].Cells[4].Value.ToString();                    
                     DateTime dtDbFaaliyet = DateTime.Parse(dbFaaliyetYili);
                     DateTime gecerliTarih = dtDbFaaliyet.AddDays(60);
                     if (gecerliTarih >=bugun)
                     {
-                        renk.BackColor = Color.Green;
+                        renk.BackColor = Color.YellowGreen;
                     }
                     else
                     {
-                        renk.BackColor = Color.Red;
+                        renk.BackColor = Color.Firebrick;
                     }
 
                 }
@@ -128,12 +153,12 @@ namespace EvrakTakipSistemi
 
                     if (dataGridView1.Rows[i].Cells[3].Value.ToString() == Convert.ToString(vergiYili))
                     {
-                        renk.BackColor = Color.Green;
+                        renk.BackColor = Color.YellowGreen;
                        
                     }
                     else
                     {
-                        renk.BackColor = Color.Red;
+                        renk.BackColor = Color.Yellow;
                     }
                     dataGridView1.Rows[i].Cells[3].Style.BackColor = renk.BackColor;
 
