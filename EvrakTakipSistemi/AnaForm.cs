@@ -98,7 +98,7 @@ namespace EvrakTakipSistemi
                 DataGridViewCellStyle renk = new DataGridViewCellStyle();
                 DateTime bugun = DateTime.Now;
 
-                if (dataGridView1.Rows[i].Cells[i].Value.ToString() != "")
+                if (!string.IsNullOrEmpty(dataGridView1.Rows[i].Cells[i].Value.ToString()))
                 {
                     //imza sirküleri tarihi için
                     dbImzaYili = dataGridView1.Rows[i].Cells[5].Value.ToString();
@@ -133,10 +133,11 @@ namespace EvrakTakipSistemi
                     if (dataGridView1.Rows[i].Cells[3].Value.ToString() == Convert.ToString(vergiYili))
                     {
                         renk.BackColor = Color.YellowGreen;
+                        
                     }
                     else
                     {
-                        renk.BackColor = Color.Yellow;
+                        renk.BackColor = Color.Firebrick;
                     }
                     dataGridView1.Rows[i].Cells[3].Style.BackColor = renk.BackColor;
 
