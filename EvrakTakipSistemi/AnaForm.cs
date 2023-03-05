@@ -63,42 +63,68 @@ namespace EvrakTakipSistemi
             //bgl.baglanti().Close();
             //Listele();
 
-            OleDbCommand komut = new OleDbCommand("insert into Tbl_Evraklar (VKN,FirmaAd,VergiLevhasiYili,FaaliyetBelgesiTarihi,ImzaSirküsüTarihi,FirmaYetkilileri) values (@p1,@p2,@p3,@p4,@p5,@p6)", bgl.baglanti());
-            komut.Parameters.AddWithValue("@p1", mskVkn.Text);
-            komut.Parameters.AddWithValue("@p2", tbxAd.Text);
-            if (!string.IsNullOrEmpty(tbxVergiYili.Text))
+            if (string.IsNullOrEmpty(tbxAd.Text) && string.IsNullOrEmpty(mskVkn.Text))
             {
-                komut.Parameters.AddWithValue("@p3", tbxVergiYili.Text);
+                MessageBox.Show("Lütfen VKN ve Firma Ad bölümlerini doldurduğunuzdan emin olunuz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else if (string.IsNullOrEmpty(tbxAd.Text))
+            {
+                MessageBox.Show("Lütfen Firma Ad bölümünü doldurduğunuzdan emin olunuz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tbxAd.Focus();
+            }
+            else if (string.IsNullOrEmpty(mskVkn.Text))
+            {
+                MessageBox.Show("Lütfen VKN bölümünü doldurduğunuzdan emin olunuz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mskVkn.Focus();
+            }
+            else if (mskVkn.Text.Length<=10)
+            {
+                MessageBox.Show("Lütfen geçerli bir VKN giriniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mskVkn.Focus();
+            }
+            
             else
             {
-                komut.Parameters.AddWithValue("@p3", DBNull.Value);
+                OleDbCommand komut = new OleDbCommand("insert into Tbl_Evraklar (VKN,FirmaAd,VergiLevhasiYili,FaaliyetBelgesiTarihi,ImzaSirküsüTarihi,FirmaYetkilileri) values (@p1,@p2,@p3,@p4,@p5,@p6)", bgl.baglanti());
+                komut.Parameters.AddWithValue("@p1", mskVkn.Text);
+                komut.Parameters.AddWithValue("@p2", tbxAd.Text);
+                if (!string.IsNullOrEmpty(tbxVergiYili.Text))
+                {
+                    komut.Parameters.AddWithValue("@p3", tbxVergiYili.Text);
+                }
+                else
+                {
+                    komut.Parameters.AddWithValue("@p3", DBNull.Value);
+                }
+
+
+                if (!string.IsNullOrEmpty(tbxFaaliyetBelgesiTarih.Text))
+                {
+                    komut.Parameters.AddWithValue("@p4", tbxFaaliyetBelgesiTarih.Text);
+                }
+                else
+                {
+                    komut.Parameters.AddWithValue("@p4", DBNull.Value);
+                }
+
+                if (!string.IsNullOrEmpty(tbxİmzaSirkusuTarih.Text))
+                {
+                    komut.Parameters.AddWithValue("@p5", tbxİmzaSirkusuTarih.Text);
+                }
+                else
+                {
+                    komut.Parameters.AddWithValue("@p5", DBNull.Value);
+                }
+                komut.Parameters.AddWithValue("@p6", rtbxFirmaYetkili.Text);
+                komut.ExecuteNonQuery();
+                MessageBox.Show("Ekleme işlemi başarılı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Temizle();
+                bgl.baglanti().Close();
+                Listele();
+               
             }
 
 
-            if (!string.IsNullOrEmpty(tbxFaaliyetBelgesiTarih.Text))
-            {
-                komut.Parameters.AddWithValue("@p4", tbxFaaliyetBelgesiTarih.Text);
-            }
-            else
-            {
-                komut.Parameters.AddWithValue("@p4", DBNull.Value);
-            }
-
-            if (!string.IsNullOrEmpty(tbxİmzaSirkusuTarih.Text))
-            {
-                komut.Parameters.AddWithValue("@p5", tbxİmzaSirkusuTarih.Text);
-            }
-            else
-            {
-                komut.Parameters.AddWithValue("@p5", DBNull.Value);
-            }
-            komut.Parameters.AddWithValue("@p6", rtbxFirmaYetkili.Text);
-            komut.ExecuteNonQuery();
-            MessageBox.Show("Ekleme işlemi başarılı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Temizle();
-            bgl.baglanti().Close();
-            Listele();
 
         }
 
