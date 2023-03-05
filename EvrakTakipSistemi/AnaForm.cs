@@ -241,12 +241,20 @@ namespace EvrakTakipSistemi
         private void btnSil_Click(object sender, EventArgs e)
         {
             OleDbCommand komut = new OleDbCommand("Delete from Tbl_Evraklar where Id=@p1", bgl.baglanti());
-            komut.Parameters.AddWithValue("@p1", tbxId.Text);
-            komut.ExecuteNonQuery();
-            bgl.baglanti().Close();
-            MessageBox.Show("Silme işlemi başarılı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Temizle();
-            Listele();
+            if (string.IsNullOrEmpty(tbxId.Text))
+            {
+                MessageBox.Show("Lütfen silmek istediğiniz firmayı seçtiğinizden emin olunuz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                komut.Parameters.AddWithValue("@p1", tbxId.Text);
+                komut.ExecuteNonQuery();
+                bgl.baglanti().Close();
+                MessageBox.Show("Silme işlemi başarılı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Temizle();
+                Listele();
+            }
+            
 
         }
 
@@ -293,7 +301,7 @@ namespace EvrakTakipSistemi
             }
             else
             {
-                MessageBox.Show("Lütfen güncellemek istediğiniz firmayı seçtiğinizden emin olun.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lütfen güncellemek istediğiniz firmayı seçtiğinizden emin olunuz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
 
