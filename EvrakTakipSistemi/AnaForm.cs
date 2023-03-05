@@ -50,12 +50,49 @@ namespace EvrakTakipSistemi
 
         private void btnEkle_Click(object sender, EventArgs e)
         {
+            //OleDbCommand komut = new OleDbCommand("insert into Tbl_Evraklar (VKN,FirmaAd,VergiLevhasiYili,FaaliyetBelgesiTarihi,ImzaSirküsüTarihi,FirmaYetkilileri) values (@p1,@p2,@p3,@p4,@p5,@p6)", bgl.baglanti());
+            //komut.Parameters.AddWithValue("@p1", mskVkn.Text);
+            //komut.Parameters.AddWithValue("@p2", tbxAd.Text);
+            //komut.Parameters.AddWithValue("@p3", tbxVergiYili.Text);
+            //komut.Parameters.AddWithValue("@p4", tbxFaaliyetBelgesiTarih.Text);
+            //komut.Parameters.AddWithValue("@p5", tbxİmzaSirkusuTarih.Text);
+            //komut.Parameters.AddWithValue("@p6", rtbxFirmaYetkili.Text);
+            //komut.ExecuteNonQuery();
+            //MessageBox.Show("Ekleme işlemi başarılı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //Temizle();
+            //bgl.baglanti().Close();
+            //Listele();
+
             OleDbCommand komut = new OleDbCommand("insert into Tbl_Evraklar (VKN,FirmaAd,VergiLevhasiYili,FaaliyetBelgesiTarihi,ImzaSirküsüTarihi,FirmaYetkilileri) values (@p1,@p2,@p3,@p4,@p5,@p6)", bgl.baglanti());
             komut.Parameters.AddWithValue("@p1", mskVkn.Text);
             komut.Parameters.AddWithValue("@p2", tbxAd.Text);
-            komut.Parameters.AddWithValue("@p3", tbxVergiYili.Text);
-            komut.Parameters.AddWithValue("@p4", tbxFaaliyetBelgesiTarih.Text);
-            komut.Parameters.AddWithValue("@p5", tbxİmzaSirkusuTarih.Text);
+            if (!string.IsNullOrEmpty(tbxVergiYili.Text))
+            {
+                komut.Parameters.AddWithValue("@p3", tbxVergiYili.Text);
+            }
+            else
+            {
+                komut.Parameters.AddWithValue("@p3", DBNull.Value);
+            }
+
+
+            if (!string.IsNullOrEmpty(tbxFaaliyetBelgesiTarih.Text))
+            {
+                komut.Parameters.AddWithValue("@p4", tbxFaaliyetBelgesiTarih.Text);
+            }
+            else
+            {
+                komut.Parameters.AddWithValue("@p4", DBNull.Value);
+            }
+
+            if (!string.IsNullOrEmpty(tbxİmzaSirkusuTarih.Text))
+            {
+                komut.Parameters.AddWithValue("@p5", tbxİmzaSirkusuTarih.Text);
+            }
+            else
+            {
+                komut.Parameters.AddWithValue("@p5", DBNull.Value);
+            }
             komut.Parameters.AddWithValue("@p6", rtbxFirmaYetkili.Text);
             komut.ExecuteNonQuery();
             MessageBox.Show("Ekleme işlemi başarılı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -98,7 +135,8 @@ namespace EvrakTakipSistemi
                 DataGridViewCellStyle renk = new DataGridViewCellStyle();
                 DateTime bugun = DateTime.Now;
 
-                if (!string.IsNullOrEmpty(dataGridView1.Rows[i].Cells[i].Value.ToString()))
+                if (!string.IsNullOrEmpty(dataGridView1.Rows[i].Cells[5].Value.ToString()))
+
                 {
                     //imza sirküleri tarihi için
                     dbImzaYili = dataGridView1.Rows[i].Cells[5].Value.ToString();
@@ -112,7 +150,10 @@ namespace EvrakTakipSistemi
                         renk.BackColor = Color.Firebrick;
                     }
                     dataGridView1.Rows[i].Cells[5].Style.BackColor = renk.BackColor;
+                }
 
+                if (!string.IsNullOrEmpty(dataGridView1.Rows[i].Cells[4].Value.ToString()))
+                {
                     //faaliyet belgesi tarihi için
                     dbFaaliyetYili = dataGridView1.Rows[i].Cells[4].Value.ToString();
                     DateTime dtDbFaaliyet = DateTime.Parse(dbFaaliyetYili);
@@ -126,28 +167,31 @@ namespace EvrakTakipSistemi
                         renk.BackColor = Color.Firebrick;
                     }
                     dataGridView1.Rows[i].Cells[4].Style.BackColor = renk.BackColor;
+                }
 
+                if (!string.IsNullOrEmpty(dataGridView1.Rows[i].Cells[3].Value.ToString()))
+                {
                     //vergi levhası yılı için
                     int buYil = bugun.Year;
                     int vergiYili = buYil - 1;
                     if (dataGridView1.Rows[i].Cells[3].Value.ToString() == Convert.ToString(vergiYili))
                     {
                         renk.BackColor = Color.YellowGreen;
-                        
+
                     }
                     else
                     {
                         renk.BackColor = Color.Firebrick;
                     }
                     dataGridView1.Rows[i].Cells[3].Style.BackColor = renk.BackColor;
-
                 }
+
 
                 else
                 {
                     renk.BackColor = Color.White;
                 }
-                               
+
             }
         }
 
