@@ -202,5 +202,11 @@ namespace EvrakTakipSistemi
         {
             Temizle();
         }
+
+        private void dataGridView1_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            //datagridviev üzerinde sütun baslığına tıklayıp programın hata vermesini önlemek amacıyla bu özelligi iptal ettim
+            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
+        }
     }
 }
