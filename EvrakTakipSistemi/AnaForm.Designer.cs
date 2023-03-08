@@ -46,6 +46,7 @@ namespace EvrakTakipSistemi
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnIletisim = new System.Windows.Forms.Button();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -200,6 +201,7 @@ namespace EvrakTakipSistemi
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnIletisim);
             this.groupBox2.Controls.Add(this.pictureBox5);
             this.groupBox2.Controls.Add(this.pictureBox4);
             this.groupBox2.Controls.Add(this.pictureBox3);
@@ -228,6 +230,16 @@ namespace EvrakTakipSistemi
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MÜŞTERİ BİLGİLERİ";
+            // 
+            // btnIletisim
+            // 
+            this.btnIletisim.Location = new System.Drawing.Point(617, 214);
+            this.btnIletisim.Name = "btnIletisim";
+            this.btnIletisim.Size = new System.Drawing.Size(153, 33);
+            this.btnIletisim.TabIndex = 22;
+            this.btnIletisim.Text = "İLETİŞİM BİLGİLERİ";
+            this.btnIletisim.UseVisualStyleBackColor = true;
+            this.btnIletisim.Click += new System.EventHandler(this.tbxIletisim_Click);
             // 
             // pictureBox5
             // 
@@ -407,6 +419,7 @@ namespace EvrakTakipSistemi
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button btnIletisim;
     }
 }
 

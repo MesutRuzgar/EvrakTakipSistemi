@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.OleDb;
+using System.Data.SqlClient;
 
 
 namespace EvrakTakipSistemi
@@ -16,14 +16,21 @@ namespace EvrakTakipSistemi
     {
         public AnaForm()
         {
+
             InitializeComponent();
+
         }
 
         DbBaglanti bgl = new DbBaglanti();
 
+        public static string tel;
+        public static string email;
+
+
         private void AnaForm_Load(object sender, EventArgs e)
         {
             Listele();
+           
 
         }
 
@@ -50,18 +57,7 @@ namespace EvrakTakipSistemi
 
         private void btnEkle_Click(object sender, EventArgs e)
         {
-            //OleDbCommand komut = new OleDbCommand("insert into Tbl_Evraklar (VKN,FirmaAd,VergiLevhasiYili,FaaliyetBelgesiTarihi,ImzaSirküsüTarihi,FirmaYetkilileri) values (@p1,@p2,@p3,@p4,@p5,@p6)", bgl.baglanti());
-            //komut.Parameters.AddWithValue("@p1", mskVkn.Text);
-            //komut.Parameters.AddWithValue("@p2", tbxAd.Text);
-            //komut.Parameters.AddWithValue("@p3", tbxVergiYili.Text);
-            //komut.Parameters.AddWithValue("@p4", tbxFaaliyetBelgesiTarih.Text);
-            //komut.Parameters.AddWithValue("@p5", tbxİmzaSirkusuTarih.Text);
-            //komut.Parameters.AddWithValue("@p6", rtbxFirmaYetkili.Text);
-            //komut.ExecuteNonQuery();
-            //MessageBox.Show("Ekleme işlemi başarılı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //Temizle();
-            //bgl.baglanti().Close();
-            //Listele();
+
 
             if (string.IsNullOrEmpty(tbxAd.Text) && string.IsNullOrEmpty(mskVkn.Text))
             {
@@ -77,51 +73,77 @@ namespace EvrakTakipSistemi
                 MessageBox.Show("Lütfen VKN bölümünü doldurduğunuzdan emin olunuz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 mskVkn.Focus();
             }
-            else if (mskVkn.Text.Length<=10)
+            else if (mskVkn.Text.Length < 10)
             {
                 MessageBox.Show("Lütfen geçerli bir VKN giriniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 mskVkn.Focus();
             }
-            
+
             else
             {
-                OleDbCommand komut = new OleDbCommand("insert into Tbl_Evraklar (VKN,FirmaAd,VergiLevhasiYili,FaaliyetBelgesiTarihi,ImzaSirküsüTarihi,FirmaYetkilileri) values (@p1,@p2,@p3,@p4,@p5,@p6)", bgl.baglanti());
-                komut.Parameters.AddWithValue("@p1", mskVkn.Text);
-                komut.Parameters.AddWithValue("@p2", tbxAd.Text);
-                if (!string.IsNullOrEmpty(tbxVergiYili.Text))
+                SqlCommand komut = new SqlCommand("ADDCUSTOMER", bgl.baglanti());
+                komut.CommandType = CommandType.StoredProcedure;
+                komut.Parameters.AddWithValue("@TaxIdentificationNumber", mskVkn.Text);
+                komut.Parameters.AddWithValue("@CompanyName", tbxAd.Text);
+                DialogResult result = MessageBox.Show("İletişim bilgileri eklemek istiyor musunuz?", "Bilgilendirme Penceresi ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
-                    komut.Parameters.AddWithValue("@p3", tbxVergiYili.Text);
+                    IletısımKayıt fr = new IletısımKayıt();
+                    DialogResult result2 = fr.ShowDialog();
+                    if (result2 == DialogResult.OK)
+                    {
+                        
+
+                        komut.Parameters.AddWithValue("@Phone", tel);
+                        komut.Parameters.AddWithValue("@Email", email);
+                    }
+
+                    else
+                    {
+                        komut.Parameters.AddWithValue("@Phone", DBNull.Value);
+                        komut.Parameters.AddWithValue("@Email", DBNull.Value);
+                    }
+                    
                 }
                 else
                 {
-                    komut.Parameters.AddWithValue("@p3", DBNull.Value);
+                    komut.Parameters.AddWithValue("@Phone", DBNull.Value);
+                    komut.Parameters.AddWithValue("@Email", DBNull.Value);
+                }
+                if (!string.IsNullOrEmpty(tbxVergiYili.Text))
+                {
+                    komut.Parameters.AddWithValue("@TaxPlateYear", tbxVergiYili.Text);
+                }
+                else
+                {
+                    komut.Parameters.AddWithValue("@TaxPlateYear", DBNull.Value);
                 }
 
 
                 if (!string.IsNullOrEmpty(tbxFaaliyetBelgesiTarih.Text))
                 {
-                    komut.Parameters.AddWithValue("@p4", tbxFaaliyetBelgesiTarih.Text);
+                    komut.Parameters.AddWithValue("@ActivityCertificateDate", tbxFaaliyetBelgesiTarih.Text);
                 }
                 else
                 {
-                    komut.Parameters.AddWithValue("@p4", DBNull.Value);
+                    komut.Parameters.AddWithValue("@ActivityCertificateDate", DBNull.Value);
                 }
 
                 if (!string.IsNullOrEmpty(tbxİmzaSirkusuTarih.Text))
                 {
-                    komut.Parameters.AddWithValue("@p5", tbxİmzaSirkusuTarih.Text);
+                    komut.Parameters.AddWithValue("@SignatureCircularDate", tbxİmzaSirkusuTarih.Text);
                 }
                 else
                 {
-                    komut.Parameters.AddWithValue("@p5", DBNull.Value);
+                    komut.Parameters.AddWithValue("@SignatureCircularDate", DBNull.Value);
                 }
-                komut.Parameters.AddWithValue("@p6", rtbxFirmaYetkili.Text);
+                komut.Parameters.AddWithValue("@CompanyOfficials", rtbxFirmaYetkili.Text);
                 komut.ExecuteNonQuery();
                 MessageBox.Show("Ekleme işlemi başarılı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Temizle();
                 bgl.baglanti().Close();
                 Listele();
-               
+
             }
 
 
@@ -130,6 +152,7 @@ namespace EvrakTakipSistemi
 
         private void Temizle()
         {
+           
             tbxId.Text = "";
             mskVkn.Text = "";
             tbxAd.Text = "";
@@ -142,8 +165,9 @@ namespace EvrakTakipSistemi
 
         private void Listele()
         {
-            OleDbCommand komut = new OleDbCommand("select Id AS [Müşteri No],VKN,FirmaAd AS [Firma Adı],VergiLevhasiYili AS [Vergi Levhası Yılı],FaaliyetBelgesiTarihi AS [Faaliyet Belgesi Tarihi],ImzaSirküsüTarihi AS [İmza Sirküsü Tarihi],FirmaYetkilileri AS [Firma Yetkilileri] from tbl_evraklar", bgl.baglanti());
-            OleDbDataAdapter da = new OleDbDataAdapter(komut);
+            SqlCommand komut = new SqlCommand("GETALL", bgl.baglanti());
+            komut.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(komut);
             DataTable dt = new DataTable();
             da.Fill(dt);
             dataGridView1.DataSource = dt;
@@ -165,7 +189,7 @@ namespace EvrakTakipSistemi
 
                 {
                     //imza sirküleri tarihi için
-                    dbImzaYili = dataGridView1.Rows[i].Cells[5].Value.ToString();
+                    dbImzaYili = dataGridView1.Rows[i].Cells["İMZA SİRKÜLER TARİHİ"].Value.ToString();
                     DateTime dtDbImzaYili = DateTime.Parse(dbImzaYili);
                     if (dtDbImzaYili >= bugun)
                     {
@@ -175,13 +199,13 @@ namespace EvrakTakipSistemi
                     {
                         renk.BackColor = Color.Firebrick;
                     }
-                    dataGridView1.Rows[i].Cells[5].Style.BackColor = renk.BackColor;
+                    dataGridView1.Rows[i].Cells["İMZA SİRKÜLER TARİHİ"].Style.BackColor = renk.BackColor;
                 }
 
-                if (!string.IsNullOrEmpty(dataGridView1.Rows[i].Cells[4].Value.ToString()))
+                if (!string.IsNullOrEmpty(dataGridView1.Rows[i].Cells["FAALİYET BELGESİ TARİHİ"].Value.ToString()))
                 {
                     //faaliyet belgesi tarihi için
-                    dbFaaliyetYili = dataGridView1.Rows[i].Cells[4].Value.ToString();
+                    dbFaaliyetYili = dataGridView1.Rows[i].Cells["FAALİYET BELGESİ TARİHİ"].Value.ToString();
                     DateTime dtDbFaaliyet = DateTime.Parse(dbFaaliyetYili);
                     DateTime gecerliTarih = dtDbFaaliyet.AddDays(60);
                     if (gecerliTarih >= bugun)
@@ -192,15 +216,15 @@ namespace EvrakTakipSistemi
                     {
                         renk.BackColor = Color.Firebrick;
                     }
-                    dataGridView1.Rows[i].Cells[4].Style.BackColor = renk.BackColor;
+                    dataGridView1.Rows[i].Cells["FAALİYET BELGESİ TARİHİ"].Style.BackColor = renk.BackColor;
                 }
 
-                if (!string.IsNullOrEmpty(dataGridView1.Rows[i].Cells[3].Value.ToString()))
+                if (!string.IsNullOrEmpty(dataGridView1.Rows[i].Cells["VERGİ LEVHASI YILI"].Value.ToString()))
                 {
                     //vergi levhası yılı için
                     int buYil = bugun.Year;
                     int vergiYili = buYil - 1;
-                    if (dataGridView1.Rows[i].Cells[3].Value.ToString() == Convert.ToString(vergiYili))
+                    if (dataGridView1.Rows[i].Cells["VERGİ LEVHASI YILI"].Value.ToString() == Convert.ToString(vergiYili))
                     {
                         renk.BackColor = Color.YellowGreen;
 
@@ -209,7 +233,7 @@ namespace EvrakTakipSistemi
                     {
                         renk.BackColor = Color.Firebrick;
                     }
-                    dataGridView1.Rows[i].Cells[3].Style.BackColor = renk.BackColor;
+                    dataGridView1.Rows[i].Cells["VERGİ LEVHASI YILI"].Style.BackColor = renk.BackColor;
                 }
 
 
@@ -224,12 +248,12 @@ namespace EvrakTakipSistemi
 
         private void Filtre()
         {
-            OleDbCommand komut = new OleDbCommand("select Id AS [Müşteri No],VKN,FirmaAd AS [Firma Adı],VergiLevhasiYili AS [Vergi Levhası Yılı],FaaliyetBelgesiTarihi AS [Faaliyet Belgesi Tarihi],ImzaSirküsüTarihi AS [İmza Sirküsü Tarihi],FirmaYetkilileri AS [Firma Yetkilileri] from tbl_evraklar where FirmaAd like '%" + tbxSearch.Text + "%'", bgl.baglanti());
-            OleDbDataAdapter da = new OleDbDataAdapter(komut);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            dataGridView1.DataSource = dt;
-            Gecerlimi();
+            //SqlCommand komut = new SqlCommand("select Id AS [Müşteri No],VKN,FirmaAd AS [Firma Adı],VergiLevhasiYili AS [Vergi Levhası Yılı],FaaliyetBelgesiTarihi AS [Faaliyet Belgesi Tarihi],ImzaSirküsüTarihi AS [İmza Sirküsü Tarihi],FirmaYetkilileri AS [Firma Yetkilileri] from Customers where FirmaAd like '%" + tbxSearch.Text + "%'", bgl.baglanti());
+            //SqlDataAdapter da = new SqlDataAdapter(komut);
+            //DataTable dt = new DataTable();
+            //da.Fill(dt);
+            //dataGridView1.DataSource = dt;
+            //Gecerlimi();
         }
 
         private void tbxSearch_TextChanged(object sender, EventArgs e)
@@ -240,7 +264,7 @@ namespace EvrakTakipSistemi
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-            OleDbCommand komut = new OleDbCommand("Delete from Tbl_Evraklar where Id=@p1", bgl.baglanti());
+            SqlCommand komut = new SqlCommand("Delete from Customers where Id=@p1", bgl.baglanti());
             if (string.IsNullOrEmpty(tbxId.Text))
             {
                 MessageBox.Show("Lütfen silmek istediğiniz firmayı seçtiğinizden emin olunuz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -254,7 +278,7 @@ namespace EvrakTakipSistemi
                 Temizle();
                 Listele();
             }
-            
+
 
         }
 
@@ -262,7 +286,7 @@ namespace EvrakTakipSistemi
         {
             if (!string.IsNullOrEmpty(tbxId.Text))
             {
-                OleDbCommand komut = new OleDbCommand("update Tbl_Evraklar set VKN=@p1,FirmaAd=@p2,VergiLevhasiYili=@p3,FaaliyetBelgesiTarihi=@p4,ImzaSirküsüTarihi=@p5,FirmaYetkilileri=@p6 where Id=@p7", bgl.baglanti());
+                SqlCommand komut = new SqlCommand("update Customers set TaxIdentificationNumber=@p1,CompanyName=@p2,TaxPlateYear=@p3,ActivityCertificateDate=@p4,SignatureCircularDate=@p5,CompanyOfficials=@p6 where Id=@p7", bgl.baglanti());
                 komut.Parameters.AddWithValue("@p1", mskVkn.Text);
                 komut.Parameters.AddWithValue("@p2", tbxAd.Text);
                 if (!string.IsNullOrEmpty(tbxVergiYili.Text))
@@ -303,7 +327,7 @@ namespace EvrakTakipSistemi
             {
                 MessageBox.Show("Lütfen güncellemek istediğiniz firmayı seçtiğinizden emin olunuz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
 
         }
 
@@ -316,6 +340,21 @@ namespace EvrakTakipSistemi
         {
             //datagridviev üzerinde sütun baslığına tıklayıp programın hata vermesini önlemek amacıyla bu özelligi iptal ettim
             e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
+        }
+
+        private void tbxIletisim_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(tbxId.Text))
+            {
+                MessageBox.Show("Lütfen bir müşteri seçiniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                IletisimFormu frm = new IletisimFormu();
+                frm.id = tbxId.Text;
+                frm.Show();
+            }
+
         }
     }
 }

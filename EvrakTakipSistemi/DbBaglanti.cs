@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.OleDb;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace EvrakTakipSistemi
 {
     public class DbBaglanti
     {
-       public OleDbConnection baglanti()
+       public SqlConnection baglanti()
         {
-           OleDbConnection baglan = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\mruzgar\Desktop\AngunVeriTabani.mdb");
+            SqlConnection baglan = new SqlConnection("server=RUZGAR;user id=sa;password=123456;initial catalog=dbAngun;");
             baglan.Open();
             return baglan;
         }
