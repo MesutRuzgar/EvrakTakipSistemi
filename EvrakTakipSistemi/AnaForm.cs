@@ -247,12 +247,14 @@ namespace EvrakTakipSistemi
 
         private void Filtre()
         {
-            //SqlCommand komut = new SqlCommand("select Id AS [Müşteri No],VKN,FirmaAd AS [Firma Adı],VergiLevhasiYili AS [Vergi Levhası Yılı],FaaliyetBelgesiTarihi AS [Faaliyet Belgesi Tarihi],ImzaSirküsüTarihi AS [İmza Sirküsü Tarihi],FirmaYetkilileri AS [Firma Yetkilileri] from Customers where FirmaAd like '%" + tbxSearch.Text + "%'", bgl.baglanti());
-            //SqlDataAdapter da = new SqlDataAdapter(komut);
-            //DataTable dt = new DataTable();
-            //da.Fill(dt);
-            //dataGridView1.DataSource = dt;
-            //Gecerlimi();
+            SqlCommand komut = new SqlCommand("SEARCH", bgl.baglanti());
+            komut.CommandType = CommandType.StoredProcedure;
+            komut.Parameters.AddWithValue("@search",tbxSearch.Text);
+            SqlDataAdapter da = new SqlDataAdapter(komut);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+            Gecerlimi();
         }
 
         private void tbxSearch_TextChanged(object sender, EventArgs e)
