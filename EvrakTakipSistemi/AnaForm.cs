@@ -30,7 +30,7 @@ namespace EvrakTakipSistemi
         private void AnaForm_Load(object sender, EventArgs e)
         {
             Listele();
-            
+
         }
 
 
@@ -91,7 +91,7 @@ namespace EvrakTakipSistemi
                     DialogResult result2 = fr.ShowDialog();
                     if (result2 == DialogResult.OK)
                     {
-                        
+
 
                         komut.Parameters.AddWithValue("@Phone", tel);
                         komut.Parameters.AddWithValue("@Email", email);
@@ -102,7 +102,7 @@ namespace EvrakTakipSistemi
                         komut.Parameters.AddWithValue("@Phone", DBNull.Value);
                         komut.Parameters.AddWithValue("@Email", DBNull.Value);
                     }
-                    
+
                 }
                 else
                 {
@@ -151,7 +151,7 @@ namespace EvrakTakipSistemi
 
         private void Temizle()
         {
-           
+
             tbxId.Text = "";
             mskVkn.Text = "";
             tbxAd.Text = "";
@@ -265,7 +265,7 @@ namespace EvrakTakipSistemi
         {
             SqlCommand komut = new SqlCommand("DELETECUSTOMER", bgl.baglanti());
             komut.CommandType = CommandType.StoredProcedure;
-          
+
             if (string.IsNullOrEmpty(tbxId.Text))
             {
                 MessageBox.Show("Lütfen silmek istediğiniz firmayı seçtiğinizden emin olunuz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -287,37 +287,39 @@ namespace EvrakTakipSistemi
         {
             if (!string.IsNullOrEmpty(tbxId.Text))
             {
-                SqlCommand komut = new SqlCommand("update Customers set TaxIdentificationNumber=@p1,CompanyName=@p2,TaxPlateYear=@p3,ActivityCertificateDate=@p4,SignatureCircularDate=@p5,CompanyOfficials=@p6 where Id=@p7", bgl.baglanti());
-                komut.Parameters.AddWithValue("@p1", mskVkn.Text);
-                komut.Parameters.AddWithValue("@p2", tbxAd.Text);
+                SqlCommand komut = new SqlCommand("UPDATECUSTOMER", bgl.baglanti());
+                komut.CommandType = CommandType.StoredProcedure;
+                komut.Parameters.AddWithValue("@TaxIdentificationNumber", mskVkn.Text);
+                komut.Parameters.AddWithValue("@CompanyName", tbxAd.Text);
                 if (!string.IsNullOrEmpty(tbxVergiYili.Text))
                 {
-                    komut.Parameters.AddWithValue("@p3", tbxVergiYili.Text);
+                    komut.Parameters.AddWithValue("@TaxPlateYear", tbxVergiYili.Text);
                 }
                 else
                 {
-                    komut.Parameters.AddWithValue("@p3", DBNull.Value);
+                    komut.Parameters.AddWithValue("@TaxPlateYear", DBNull.Value);
                 }
 
                 if (!string.IsNullOrEmpty(tbxFaaliyetBelgesiTarih.Text))
                 {
-                    komut.Parameters.AddWithValue("@p4",DateTime.Parse( tbxFaaliyetBelgesiTarih.Text));
+                    komut.Parameters.AddWithValue("@ActivityCertificateDate", DateTime.Parse(tbxFaaliyetBelgesiTarih.Text));
                 }
                 else
                 {
-                    komut.Parameters.AddWithValue("@p4", DBNull.Value);
+                    komut.Parameters.AddWithValue("@ActivityCertificateDate", DBNull.Value);
                 }
 
                 if (!string.IsNullOrEmpty(tbxİmzaSirkusuTarih.Text))
                 {
-                    komut.Parameters.AddWithValue("@p5", DateTime.Parse(tbxİmzaSirkusuTarih.Text));
+                    komut.Parameters.AddWithValue("@SignatureCircularDate", DateTime.Parse(tbxİmzaSirkusuTarih.Text));
                 }
                 else
                 {
-                    komut.Parameters.AddWithValue("@p5", DBNull.Value);
+                    komut.Parameters.AddWithValue("@SignatureCircularDate", DBNull.Value);
                 }
-                komut.Parameters.AddWithValue("@p6", rtbxFirmaYetkili.Text);
-                komut.Parameters.AddWithValue("@p7", tbxId.Text);
+                komut.Parameters.AddWithValue("@CompanyOfficials", rtbxFirmaYetkili.Text);
+                komut.Parameters.AddWithValue("@Id", tbxId.Text);
+
                 komut.ExecuteNonQuery();
                 bgl.baglanti().Close();
                 MessageBox.Show("Güncelleme işlemi başarılı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);

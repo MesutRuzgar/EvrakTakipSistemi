@@ -56,7 +56,7 @@
             this.tbxAd.Enabled = false;
             this.tbxAd.Location = new System.Drawing.Point(167, 82);
             this.tbxAd.Name = "tbxAd";
-            this.tbxAd.Size = new System.Drawing.Size(184, 26);
+            this.tbxAd.Size = new System.Drawing.Size(240, 26);
             this.tbxAd.TabIndex = 1;
             // 
             // mskTel
@@ -64,7 +64,7 @@
             this.mskTel.Location = new System.Drawing.Point(167, 114);
             this.mskTel.Mask = "(999) 000-0000";
             this.mskTel.Name = "mskTel";
-            this.mskTel.Size = new System.Drawing.Size(184, 26);
+            this.mskTel.Size = new System.Drawing.Size(240, 26);
             this.mskTel.TabIndex = 1;
             // 
             // label2
@@ -92,7 +92,7 @@
             this.tbxVKN.Enabled = false;
             this.tbxVKN.Location = new System.Drawing.Point(167, 50);
             this.tbxVKN.Name = "tbxVKN";
-            this.tbxVKN.Size = new System.Drawing.Size(184, 26);
+            this.tbxVKN.Size = new System.Drawing.Size(240, 26);
             this.tbxVKN.TabIndex = 8;
             // 
             // label4
@@ -110,7 +110,7 @@
             this.tbxId.Enabled = false;
             this.tbxId.Location = new System.Drawing.Point(167, 18);
             this.tbxId.Name = "tbxId";
-            this.tbxId.Size = new System.Drawing.Size(184, 26);
+            this.tbxId.Size = new System.Drawing.Size(240, 26);
             this.tbxId.TabIndex = 11;
             // 
             // label5
@@ -128,7 +128,7 @@
             this.btnGuncelle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnGuncelle.Location = new System.Drawing.Point(167, 178);
             this.btnGuncelle.Name = "btnGuncelle";
-            this.btnGuncelle.Size = new System.Drawing.Size(184, 31);
+            this.btnGuncelle.Size = new System.Drawing.Size(240, 31);
             this.btnGuncelle.TabIndex = 4;
             this.btnGuncelle.Text = "GÜNCELLE";
             this.btnGuncelle.UseVisualStyleBackColor = true;
@@ -138,7 +138,7 @@
             // 
             this.tbxEmail.Location = new System.Drawing.Point(167, 146);
             this.tbxEmail.Name = "tbxEmail";
-            this.tbxEmail.Size = new System.Drawing.Size(184, 26);
+            this.tbxEmail.Size = new System.Drawing.Size(240, 26);
             this.tbxEmail.TabIndex = 12;
             // 
             // IletisimFormu
@@ -147,7 +147,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.CadetBlue;
-            this.ClientSize = new System.Drawing.Size(387, 220);
+            this.ClientSize = new System.Drawing.Size(436, 220);
             this.Controls.Add(this.tbxEmail);
             this.Controls.Add(this.btnGuncelle);
             this.Controls.Add(this.tbxId);
