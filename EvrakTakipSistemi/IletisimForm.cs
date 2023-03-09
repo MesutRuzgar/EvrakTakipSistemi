@@ -44,7 +44,22 @@ namespace EvrakTakipSistemi
         
         private void btnGuncelle_Click(object sender, EventArgs e)
         {
-          
+            try
+            {
+                SqlCommand cmd = new SqlCommand("UPTADETCOMMUNICATION", bgl.baglanti());
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.Parameters.AddWithValue("@Phone", mskTel.Text);
+                cmd.Parameters.AddWithValue("@Email", tbxEmail.Text);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("İletişim bilgileri başarıyla güncellendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("İletişim bilgileri güncellenirken bir hata oluştu.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
             
         }
     }
