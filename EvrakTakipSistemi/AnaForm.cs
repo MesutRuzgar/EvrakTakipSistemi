@@ -30,8 +30,7 @@ namespace EvrakTakipSistemi
         private void AnaForm_Load(object sender, EventArgs e)
         {
             Listele();
-           
-
+            
         }
 
 
@@ -183,7 +182,7 @@ namespace EvrakTakipSistemi
             for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
                 DataGridViewCellStyle renk = new DataGridViewCellStyle();
-                DateTime bugun = DateTime.Now;
+                DateTime bugun = DateTime.Today;
 
                 if (!string.IsNullOrEmpty(dataGridView1.Rows[i].Cells[5].Value.ToString()))
 
@@ -300,7 +299,7 @@ namespace EvrakTakipSistemi
 
                 if (!string.IsNullOrEmpty(tbxFaaliyetBelgesiTarih.Text))
                 {
-                    komut.Parameters.AddWithValue("@p4", tbxFaaliyetBelgesiTarih.Text);
+                    komut.Parameters.AddWithValue("@p4",DateTime.Parse( tbxFaaliyetBelgesiTarih.Text));
                 }
                 else
                 {
@@ -309,7 +308,7 @@ namespace EvrakTakipSistemi
 
                 if (!string.IsNullOrEmpty(tbxİmzaSirkusuTarih.Text))
                 {
-                    komut.Parameters.AddWithValue("@p5", tbxİmzaSirkusuTarih.Text);
+                    komut.Parameters.AddWithValue("@p5", DateTime.Parse(tbxİmzaSirkusuTarih.Text));
                 }
                 else
                 {

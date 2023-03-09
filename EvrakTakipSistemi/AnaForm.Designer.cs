@@ -40,7 +40,6 @@ namespace EvrakTakipSistemi
             this.tbxAd = new System.Windows.Forms.TextBox();
             this.tbxVergiYili = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.tbxFaaliyetBelgesiTarih = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbxİmzaSirkusuTarih = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -58,6 +57,7 @@ namespace EvrakTakipSistemi
             this.btnSil = new System.Windows.Forms.Button();
             this.btnEkle = new System.Windows.Forms.Button();
             this.rtbxFirmaYetkili = new System.Windows.Forms.RichTextBox();
+            this.tbxFaaliyetBelgesiTarih = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -157,13 +157,6 @@ namespace EvrakTakipSistemi
             this.label4.Size = new System.Drawing.Size(152, 18);
             this.label4.TabIndex = 7;
             this.label4.Text = "VERGİ LEVHASI YILI :";
-            // 
-            // tbxFaaliyetBelgesiTarih
-            // 
-            this.tbxFaaliyetBelgesiTarih.Location = new System.Drawing.Point(617, 39);
-            this.tbxFaaliyetBelgesiTarih.Name = "tbxFaaliyetBelgesiTarih";
-            this.tbxFaaliyetBelgesiTarih.Size = new System.Drawing.Size(153, 24);
-            this.tbxFaaliyetBelgesiTarih.TabIndex = 5;
             // 
             // label5
             // 
@@ -346,6 +339,13 @@ namespace EvrakTakipSistemi
             this.rtbxFirmaYetkili.TabIndex = 7;
             this.rtbxFirmaYetkili.Text = "";
             // 
+            // tbxFaaliyetBelgesiTarih
+            // 
+            this.tbxFaaliyetBelgesiTarih.Location = new System.Drawing.Point(617, 39);
+            this.tbxFaaliyetBelgesiTarih.Name = "tbxFaaliyetBelgesiTarih";
+            this.tbxFaaliyetBelgesiTarih.Size = new System.Drawing.Size(153, 24);
+            this.tbxFaaliyetBelgesiTarih.TabIndex = 5;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
@@ -401,7 +401,6 @@ namespace EvrakTakipSistemi
         private System.Windows.Forms.TextBox tbxAd;
         private System.Windows.Forms.TextBox tbxVergiYili;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox tbxFaaliyetBelgesiTarih;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbxİmzaSirkusuTarih;
         private System.Windows.Forms.Label label6;
@@ -420,6 +419,7 @@ namespace EvrakTakipSistemi
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button btnIletisim;
+        private System.Windows.Forms.TextBox tbxFaaliyetBelgesiTarih;
     }
 }
 
