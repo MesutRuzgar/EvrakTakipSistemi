@@ -263,14 +263,16 @@ namespace EvrakTakipSistemi
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-            SqlCommand komut = new SqlCommand("Delete from Customers where Id=@p1", bgl.baglanti());
+            SqlCommand komut = new SqlCommand("DELETECUSTOMER", bgl.baglanti());
+            komut.CommandType = CommandType.StoredProcedure;
+          
             if (string.IsNullOrEmpty(tbxId.Text))
             {
                 MessageBox.Show("Lütfen silmek istediğiniz firmayı seçtiğinizden emin olunuz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                komut.Parameters.AddWithValue("@p1", tbxId.Text);
+                komut.Parameters.AddWithValue("@ID", tbxId.Text);
                 komut.ExecuteNonQuery();
                 bgl.baglanti().Close();
                 MessageBox.Show("Silme işlemi başarılı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
